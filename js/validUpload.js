@@ -6,13 +6,10 @@
         this.init();
     }
 
-    var jQueryvalidUpload = jQuery.validUpload;
     jQuery.extend(jQuery.validUpload, {
         defaults: {
             browse_button: 'browse',
             selectorInput: '.elementUploaded',
-            classEmpty: 'empty',
-            classUplaoded: 'uploaded',
             selectorUploadDelete: '.upload-delete',
             selectorUploadFinish: '.finished',
             selectorProgress: '.progress-bar',
@@ -22,22 +19,120 @@
             ],
             dataUploader: {
                 runtimes: 'html5,flash,html4',
-                url: 'upload/upload.php',
-                flash_swf_url: '/js/uploader/plupload.flash.swf',
+                url: 'components/plupload/examples/upload.php',
+                flash_swf_url: 'components/plupload/js/Moxie.swf',
                 chunk_size: '1mb',
                 multi_selection: false,
                 max_file_count: 1,
                 unique_names: true
-            }
+            },
+
+            use_template: true,
+            template_alone: '' +
+                '<div class="row">' +
+                '<div class="col-md-8">' +
+                '<input type="text" class="form-control elementUploaded validate[required]" id="{{input_id}}" name="{{input_name}}" value="" placeholder="chose file"/>' +
+                '</div>' +
+                '<div class="col-md-4">' +
+                '<a id="{{id_browse}}"  href="javascript:;" class="glyphicon glyphicon-open"></a>' +
+                '<a href="#" class="glyphicon glyphicon-remove upload-delete" title="Remove"></a>' +
+                '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                '<div class="col-md-8">' +
+                '<div class="progressUploader progress progress-striped active">' +
+                '<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-md-4">' +
+                '<span class=" finished glyphicon glyphicon-ok-sign"></span>' +
+                '</div>' +
+                '</div>',
+
+            template_multiple: '' +
+                '<div class="row">' +
+                '<div class="col-md-8">' +
+                '<input type="text" class="form-control elementUploaded validate[required]" id="{{input_id}}" name="{{input_name}}" value="" placeholder="chose file"/>' +
+                '</div>' +
+                '<div class="col-md-4">' +
+                '<a id="{{id_browse}}"  href="javascript:;" class="glyphicon glyphicon-open"></a>' +
+                '<a href="#" class="glyphicon glyphicon-remove upload-delete" title="Remove"></a>' +
+                '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                '<div class="col-md-8">' +
+                '<div class="progressUploader progress progress-striped active">' +
+                '<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-md-4">' +
+                '<span class=" finished glyphicon glyphicon-ok-sign"></span>' +
+                '</div>' +
+                '</div>'
+
         },
         prototype: {
             init: function () {
                 this.timeout = '';
+                this.initTemplate();
                 this.initData();
                 this.initDisplay();
                 this.initEvent();
 
+
                 this.elementUploader.init();
+            },
+
+            initTemplate: function () {
+
+                //Check use integrating templating
+                //
+                if (!this.settings.use_template) {
+                    return false;
+                }
+
+                var prefix = '';
+                if (typeof(this.element.id) != 'undefined' && this.element.id != '') {
+                    prefix = this.element.id;
+                } else {
+                    prefix = (Math.random() + '').replace('0.', '');
+                    this.element.id = prefix;
+                }
+
+                var tpl = '';
+
+                if (!this.settings.dataUploader.multi_selection) {
+                    tpl = this.settings.template_alone;
+                } else {
+                    tpl = this.settings.template_multiple;
+                }
+
+
+                // Overide option for templating
+                //
+                this.settings.browse_button = prefix + '_browse';
+
+                //Init object template
+                //
+                var obj = {
+                    'input_id': prefix + '_input_upload',
+                    'input_name': prefix + '_input_upload',
+                    'id_browse': this.settings.browse_button
+                };
+
+
+                //Parse object value for templating
+                //
+                for (var i in obj) {
+                    tpl = tpl.replace('{{' + i + '}}', obj[i]);
+                }
+
+                //Add template
+                //
+                jQuery(this.element).html(tpl);
+
+                return true;
+
             },
 
             initData: function () {
@@ -101,7 +196,6 @@
                 }
                 jQuery(this.element).validationEngine('showPrompt', err.message);
                 jQuery(this.settings.selectorProgressContener, this.element).hide();
-                console.log(err);
             },
 
             endUpload: function (up, file, info) {
