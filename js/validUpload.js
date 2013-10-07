@@ -28,6 +28,30 @@
             },
 
             use_template: true,
+
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+
+            onInit: function() {},
+            onInitTemplate: function() {},
+            onInitData: function() {},
+            onInitDisplay: function() {},
+            onInitEvent: function() {},
+
+            // CALLBACKS UPLOAD
+
+            onFilesAdded: function() {},
+            onUploadProgress: function() {},
+            onUploadInit: function() {},
+            onFileUploaded: function() {},
+            onUploadError: function() {},
+
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+
+
             template_alone: '' +
                 '<div class="row">' +
                 '<div class="col-md-8">' +
@@ -48,6 +72,8 @@
                 '<span class=" finished glyphicon glyphicon-ok-sign"></span>' +
                 '</div>' +
                 '</div>',
+
+            // --------------------------------------------------------------------------------------------
 
             template_multiple: '' +
                 '<div class="row">' +
@@ -71,17 +97,23 @@
                 '</div>'
 
         },
+        timeout:'',
         prototype: {
             init: function () {
-                this.timeout = '';
+
                 this.initTemplate();
                 this.initData();
                 this.initDisplay();
                 this.initEvent();
 
-
                 this.elementUploader.init();
+
+                this.settings.onInit(this);
             },
+
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
 
             initTemplate: function () {
 
@@ -131,11 +163,16 @@
                 //
                 jQuery(this.element).html(tpl);
 
+                this.settings.onInitTemplate(this);
+
                 return true;
 
             },
 
+            // --------------------------------------------------------------------------------------------
+
             initData: function () {
+
                 var data = this.settings.dataUploader;
 
                 data.browse_button = this.settings.browse_button;
@@ -143,34 +180,27 @@
                 data.filters = this.settings.filters;
 
                 this.elementUploader = new plupload.Uploader(data);
+                jQuery(this.element).parents('form').validationEngine();
 
+                this.settings.onInitData(this);
             },
 
+            // --------------------------------------------------------------------------------------------
+
             initDisplay: function () {
+
                 jQuery(this.settings.selectorProgressContener, this.element).hide();
                 this.tooglRemove();
                 this.toogleFinish();
+
+                this.settings.onInitDisplay(this);
             },
 
-            tooglRemove: function () {
-                var valInput = jQuery(this.settings.selectorInput, this.element).val();
-                if (valInput == '') {
-                    jQuery(this.settings.selectorUploadDelete, this.element).hide();
-                } else {
-                    jQuery(this.settings.selectorUploadDelete, this.element).show();
-                }
-
-            },
-            toogleFinish: function () {
-                var valInput = jQuery(this.settings.selectorInput, this.element).val();
-                if (valInput == '') {
-                    jQuery(this.settings.selectorUploadFinish, this.element).hide();
-                } else {
-                    jQuery(this.settings.selectorUploadFinish, this.element).show();
-                }
-            },
+            // --------------------------------------------------------------------------------------------
 
             initEvent: function () {
+
+
                 this.elementUploader.unbind('FilesAdded');
                 this.elementUploader.bind('FilesAdded', jQuery.proxy(this.addFile, this));
 
@@ -186,11 +216,47 @@
                 this.elementUploader.unbind('Error');
                 this.elementUploader.bind('Error', jQuery.proxy(this.errorUpload, this));
 
-                jQuery(this.settings.selectorUploadDelete, this.element).click(jQuery.proxy(this.removeElement, this))
+                jQuery(this.settings.selectorUploadDelete, this.element).click(jQuery.proxy(this.removeElement, this));
+
+
+                this.settings.onInitEvent(this);
+
 
             },
 
+
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+
+            tooglRemove: function () {
+                var valInput = jQuery(this.settings.selectorInput, this.element).val();
+                if (valInput == '') {
+                    jQuery(this.settings.selectorUploadDelete, this.element).hide();
+                } else {
+                    jQuery(this.settings.selectorUploadDelete, this.element).show();
+                }
+
+            },
+
+            // --------------------------------------------------------------------------------------------
+
+            toogleFinish: function () {
+                var valInput = jQuery(this.settings.selectorInput, this.element).val();
+                if (valInput == '') {
+                    jQuery(this.settings.selectorUploadFinish, this.element).hide();
+                } else {
+                    jQuery(this.settings.selectorUploadFinish, this.element).show();
+                }
+            },
+
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+
             errorUpload: function (up, err) {
+
+                this.settings.onUploadError(up, err);
 
                 if (this.timeout != '') {
                     clearTimeout(this.timeout);
@@ -200,11 +266,18 @@
                 jQuery(this.settings.selectorProgressContener, this.element).hide();
             },
 
+            // --------------------------------------------------------------------------------------------
+
             endUpload: function (up, file, info) {
+
+                this.settings.onFileUploaded(up, file, info);
+
                 jQuery(this.settings.selectorInput, this.element).val(file.target_name);
                 jQuery(this.settings.selectorInjection, this.element).html(file.target_name);
                 this.initDisplay();
             },
+
+            // --------------------------------------------------------------------------------------------
 
             removeElement: function (e) {
                 e.preventDefault();
@@ -215,19 +288,38 @@
                 return false;
             },
 
+            // --------------------------------------------------------------------------------------------
+
             initUploader: function (up, params) {
+
+                this.settings.onUploadInit(up, params);
             },
 
+            // --------------------------------------------------------------------------------------------
+
             addFile: function (up, files) {
+
+                this.settings.onFilesAdded(up, files);
+
+
                 jQuery(this.element).validationEngine('hide');
                 this.timeout = setTimeout(jQuery.proxy(this.startUpload, this), 200);
             },
 
+            // --------------------------------------------------------------------------------------------
+
             startUpload: function () {
+
                 jQuery(this.settings.selectorProgressContener, this.element).show();
                 this.elementUploader.start();
             },
+
+            // --------------------------------------------------------------------------------------------
+
             progress: function (up, file) {
+
+                this.settings.onUploadProgress(up, file);
+
                 jQuery(this.settings.selectorProgress, this.element).css({
                     width: file.percent + "%"
                 });
