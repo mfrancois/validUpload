@@ -18,16 +18,19 @@ Ce dernier est fait pour faciliter l'utilisation et la réutilisation des deux j
 
 ### Bower
 
+```sh
     bower install
-
+```
 
 #### Dépendances
+
+```json
 
     "jquery": "~1.10.2",
     "validationEngine": "~2.6.4",
     "plupload": "~2.0.0",
     "bootstrap": "~3.0.0"
-
+```
 
 
 
@@ -36,13 +39,14 @@ Ce dernier est fait pour faciliter l'utilisation et la réutilisation des deux j
 
 ### Exemple d'utilisation de base
 
+```html
     <fieldset>
          <label>Single upload</label>
          <div class="uploader_conteneur"></div>
      </fieldset>
+```
 
-
-     <script type="text/javascript">
+```js
          jQuery(document).ready(function () {
              jQuery('.uploader_conteneur').validUpload({
                  filters: [
@@ -51,8 +55,7 @@ Ce dernier est fait pour faciliter l'utilisation et la réutilisation des deux j
                  ]
              });
          });
-     </script>
-
+```
 
 ### Events
 
@@ -73,6 +76,7 @@ Event | Param | Description
 
 #### Exemple d'implémentation d'évènement
 
+```html
     <form class="form-inline" role="form">
         <fieldset>
             <label>Event upload</label>
@@ -84,8 +88,9 @@ Event | Param | Description
 
         </pre>
     </form>
+```
 
-
+```js
     jQuery('.uploader_event').validUpload({
         onFilesAdded: function (up, file) {
             log(' ');
@@ -170,3 +175,4 @@ Event | Param | Description
             log('---------------------------');
         }
     });
+```
