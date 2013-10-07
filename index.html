@@ -9,12 +9,24 @@
 
     <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="components/validationEngine/css/validationEngine.jquery.css" rel="stylesheet">
+    <link type="text/css" rel="Stylesheet" href="components/SyntaxHighlighter/styles/shCoreEclipse.css" />
+
+
     <script src="components/jquery/jquery.js"></script>
     <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="components/plupload/js/plupload.full.min.js"></script>
     <script src="components/validationEngine/js/jquery.validationEngine.js"></script>
     <script src="components/validationEngine/js/languages/jquery.validationEngine-fr.js"></script>
     <script src="js/validUpload.js"></script>
+
+
+    <script type="text/javascript" src="components/SyntaxHighlighter/scripts/XRegExp.js"></script>
+    <script type="text/javascript" src="components/SyntaxHighlighter/scripts/shLegacy.js"></script>
+    <script type="text/javascript" src="components/SyntaxHighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="components/SyntaxHighlighter/scripts/shBrushCss.js"></script>
+    <script type="text/javascript" src="components/SyntaxHighlighter/scripts/shBrushDiff.js"></script>
+    <script type="text/javascript" src="components/SyntaxHighlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="components/SyntaxHighlighter/scripts/shBrushPlain.js"></script>
 
 </head>
 <body>
@@ -58,7 +70,7 @@
         <div class="col-md-8">
             <hr/>
             <h4>Code javascript :</h4>
-            <pre>
+            <pre class="brush: jscript;">
             jQuery(document).ready(function () {
                 jQuery('.uploader_conteneur').validUpload({
                     filters: [
@@ -81,7 +93,7 @@
                     <div class="uploader_event"></div>
                 </fieldset>
                 <hr/>
-                <pre class="console pre-scrollable">
+                <pre class="console pre-scrollable brush: jscript;">
 
                 </pre>
             </form>
@@ -90,7 +102,7 @@
             <div class="col-md-8">
                 <hr/>
                 <h4>Code javascript :</h4>
-                <pre class="pre-scrollable">
+                <pre  class="brush: jscript;">
 jQuery('.uploader_event').validUpload({
     onFilesAdded: function (up, file) {
         log(' ');
@@ -344,6 +356,11 @@ jQuery('.uploader_event').validUpload({
                 log('---------------------------');
             }
         });
+
+
+
+        SyntaxHighlighter.config.clipboardSwf = 'components/SyntaxHighlighter/scripts/clipboard.swf';
+        SyntaxHighlighter.all();
     });
 </script>
 </body>
