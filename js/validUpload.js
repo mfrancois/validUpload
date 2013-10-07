@@ -175,7 +175,7 @@
                 this.elementUploader.bind('FilesAdded', jQuery.proxy(this.addFile, this));
 
                 this.elementUploader.unbind('UploadProgress');
-                this.elementUploader.bind('UploadProgress', jQuery.proxy(this.progresse, this));
+                this.elementUploader.bind('UploadProgress', jQuery.proxy(this.progress, this));
 
                 this.elementUploader.unbind('Init');
                 this.elementUploader.bind('Init', jQuery.proxy(this.initUploader, this));
@@ -191,9 +191,11 @@
             },
 
             errorUpload: function (up, err) {
+
                 if (this.timeout != '') {
                     clearTimeout(this.timeout);
                 }
+
                 jQuery(this.element).validationEngine('showPrompt', err.message);
                 jQuery(this.settings.selectorProgressContener, this.element).hide();
             },
@@ -225,7 +227,7 @@
                 jQuery(this.settings.selectorProgressContener, this.element).show();
                 this.elementUploader.start();
             },
-            progresse: function (up, file) {
+            progress: function (up, file) {
                 jQuery(this.settings.selectorProgress, this.element).css({
                     width: file.percent + "%"
                 });

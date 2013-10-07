@@ -1,47 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Exemple validUpload</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Exemple validUpload</title>
 
-        <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="components/validationEngine/css/validationEngine.jquery.css" rel="stylesheet">
-        <script src="components/jquery/jquery.js"></script>
-        <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="components/plupload/js/plupload.full.min.js"></script>
-        <script src="components/validationEngine/js/jquery.validationEngine.js"></script>
-        <script src="components/validationEngine/js/languages/jquery.validationEngine-fr.js"></script>
-        <script src="js/validUpload.js"></script>
+    <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="components/validationEngine/css/validationEngine.jquery.css" rel="stylesheet">
+    <script src="components/jquery/jquery.js"></script>
+    <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="components/plupload/js/plupload.full.min.js"></script>
+    <script src="components/validationEngine/js/jquery.validationEngine.js"></script>
+    <script src="components/validationEngine/js/languages/jquery.validationEngine-fr.js"></script>
+    <script src="js/validUpload.js"></script>
 
-    </head>
-    <body>
-        <div class="container">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
             <div class="page-header">
                 <h1>validUpload Exemple</h1>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <form class="form-inline" role="form">
-                        <fieldset>
-                            <label>Single upload</label>
-                            <div class="uploader_conteneur"></div>
-                        </fieldset>
-                        <fieldset>
-                            <label>Multiple instanciation with same class 1</label>
-                            <div class="uploader_conteneur"></div>
-                        </fieldset>
-                        <fieldset>
-                            <label>Multiple instanciation with same class 2</label>
-                            <div class="uploader_conteneur"></div>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
         </div>
-        <script type="text/javascript">
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <form class="form-inline" role="form">
+                <fieldset>
+                    <label>Single upload</label>
+
+                    <div class="uploader_conteneur"></div>
+                </fieldset>
+                <hr/>
+                <fieldset>
+                    <label>Multiple instanciation with same class 1</label>
+
+                    <div class="uploader_conteneur"></div>
+                </fieldset>
+                <hr/>
+                <fieldset>
+                    <label>Multiple instanciation with same class 2</label>
+
+                    <div class="uploader_conteneur"></div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <hr/>
+            <h4>Code javascript :</h4>
+            <pre>
             jQuery(document).ready(function () {
                 jQuery('.uploader_conteneur').validUpload({
                     filters: [
@@ -50,8 +62,22 @@
                     ]
                 });
             });
-        </script>
-    </body>
+            </pre>
+            <hr/>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('.uploader_conteneur').validUpload({
+            filters: [
+                {title: "Image files", extensions: "jpg,gif,png"},
+                {title: "Zip files", extensions: "zip"}
+            ]
+        });
+    });
+</script>
+</body>
 </html>
 
 
