@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Exemple validUpload</title>
+
+    <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="components/validationEngine/css/validationEngine.jquery.css" rel="stylesheet">
+    <script src="components/jquery/jquery.js"></script>
+    <script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="components/plupload/js/plupload.full.min.js"></script>
+    <script src="components/validationEngine/js/jquery.validationEngine.js"></script>
+    <script src="components/validationEngine/js/languages/jquery.validationEngine-fr.js"></script>
+    <script src="js/validUpload.js"></script>
+
+</head>
+
+<body>
+<div class="container">
+
+    <div class="page-header">
+        <h1>validUpload Exemple</h1>
+    </div>
+
+    <h3>Classic upload</h3>
+
+    <form class="form-inline" role="form">
+        <fieldset>
+            <div class="form-group">
+                <div id="contener_1">
+                    <label for="test_1">Upload file</label>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control elementUploaded validate[required]" id="test_1" name="test_1" value="" placeholder="chose file"/>
+                        </div>
+                        <div class="col-md-4">
+                            <a id="browse"  href="javascript:;" class="glyphicon glyphicon-open"></a>
+                            <a href="#" class="glyphicon glyphicon-remove upload-delete" title="Remove"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="progressUploader progress progress-striped active">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <span class=" finished glyphicon glyphicon-ok-sign"></span>
+                        </div>
+
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#contener_1').validUpload({
+                            filters: [
+                                {title: "Image files", extensions: "jpg,gif,png"},
+                                {title: "Zip files", extensions: "zip"}
+                            ]
+                        });
+                    });
+                </script>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+</body>
+</html>
+
+
