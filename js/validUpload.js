@@ -114,7 +114,7 @@
                 '</div>',
 
             template_one_item: '' +
-                '<div>' +
+                '<div id="{{id_div}}">' +
                 '<div class="row">' +
                 '<div class="col-md-8" data-targetname="{{id}}">' +
                 '{{file_name}}' +
@@ -210,6 +210,7 @@
                 var obj = {
                     'file_name': file.name,
                     'id': file.id,
+                    'id_div': file.id,
                     'remove': this.settings.language.remove
                 };
 
@@ -237,7 +238,6 @@
             },
 
             addOneItem: function (file) {
-                console.log(file);
                 this.injectTemplateItem(this.formatingTemplateItem(file));
             },
 
@@ -247,16 +247,76 @@
                 var $target = jQuery(evt.target);
                 var tabChilds = $target.parent().parent().children();
 
-                for(var i=0; i<tabChilds.length; i++){
+                for (var i = 0; i < tabChilds.length; i++) {
                     var targetName = jQuery(tabChilds[i]).data('targetname');
 
-                    if(typeof(targetName) != 'undefined' && targetName != null && targetName != ''){
+
+                    if (typeof(targetName) != 'undefined' && targetName != null && targetName != '') {
+                        var targetRealName = jQuery(tabChilds[i]).html();
+                        var targetExtentionName = this.fileExtention(targetRealName);
+
+                        if (targetExtentionName != '') {
+                            targetName = targetName + '.' + targetExtentionName;
+                        }
                         $target.parent().parent().remove();
-                        console.log(targetName);
+                        this.removeFileInInput(targetName);
                     }
                 }
-                console.log(evt);
             },
+
+            fileExtention: function (file) {
+                var tabFile = file.split('.');
+
+                return tabFile[tabFile.length - 1];
+            },
+
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+
+            addFileInInput: function (file) {
+                var valInput = jQuery(this.settings.selectorInput, this.element).val();
+
+                if (valInput == '') {
+                    valInput = file;
+                } else {
+                    valInput = valInput + ',' + file;
+                }
+
+                jQuery(this.settings.selectorInput, this.element).val(valInput);
+            },
+
+            removeFileInInput: function (file) {
+                var valInput = jQuery(this.settings.selectorInput, this.element).val();
+
+                if (valInput == '') {
+                    return false;
+                } else {
+                    valInput = valInput.split(',');
+
+                    var tabTmp = [];
+
+                    for (var i in valInput) {
+                        if (valInput[i] == file) {
+                            continue;
+                        }
+
+                        tabTmp.push(valInput[i]);
+                    }
+
+                    valInput = tabTmp.join(',');
+                }
+
+                jQuery(this.settings.selectorInput, this.element).val(valInput);
+
+                this.tooglRemove();
+                this.toogleFinish();
+                return true;
+
+            },
+
+            // --------------------------------------------------------------------------------------------
+
 
             // --------------------------------------------------------------------------------------------
 
@@ -361,10 +421,7 @@
             endUpload: function (up, file, info) {
 
                 this.settings.onFileUploaded(up, file, info);
-
-
-                jQuery(this.settings.selectorInput, this.element).val(file.target_name);
-                //jQuery(this.settings.selectorInjection, this.element).html(file.target_name);
+                this.addFileInInput(file.target_name);
                 this.initDisplay();
             },
 
@@ -406,12 +463,18 @@
             // --------------------------------------------------------------------------------------------
 
             progress: function (up, file) {
-
                 this.settings.onUploadProgress(up, file);
 
-                jQuery(this.settings.selectorProgress, this.element).css({
-                    width: file.percent + "%"
-                });
+                if (!this.settings.dataUploader.multi_selection) {
+                    jQuery(this.settings.selectorProgress, this.element).css({
+                        width: file.percent + "%"
+                    });
+                } else {
+                    jQuery(this.settings.selectorProgress, "#" + file.id).css({
+                        width: file.percent + "%"
+                    });
+                }
+
 
             }
         }
