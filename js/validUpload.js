@@ -2,7 +2,7 @@
  * validUpload
  * by mfrancois
  * https://github.com/mfrancois
- * @version 0.1.0
+ * @version 0.1.1
  *
  * Description :
  * validUpload est basé sur plupload et validationEngine et twitter bootsrap.
@@ -48,6 +48,7 @@
             use_template: true,
             default_value: '',
             separator: ',',
+            required:'validate[required]',
 
             // --------------------------------------------------------------------------------------------
             // --------------------------------------------------------------------------------------------
@@ -85,7 +86,7 @@
             template_single: '' +
                 '<div class="row">' +
                 '<div class="col-md-8">' +
-                '<input type="text" class="form-control elementUploaded validate[required]" id="{{input_id}}" name="{{input_name}}" value="" placeholder="{{placeholder}}"/>' +
+                '<input type="text" class="form-control elementUploaded {{validate}}" id="{{input_id}}" name="{{input_name}}" value="" placeholder="{{placeholder}}"/>' +
                 '</div>' +
                 '<div class="col-md-4">' +
                 '<a id="{{id_browse}}"  href="javascript:;" class="glyphicon glyphicon-open"></a>' +
@@ -108,7 +109,7 @@
             template_multiple: '' +
                 '<div class="row">' +
                 '<div class="col-md-8">' +
-                '<input type="text" class="form-control elementUploaded validate[required]" id="{{input_id}}" name="{{input_name}}" value="" style="opacity: 0;" placeholder="{{placeholder}}"/>' +
+                '<input type="text" class="form-control elementUploaded {{validate}}" id="{{input_id}}" name="{{input_name}}" value="" style="opacity: 0;" placeholder="{{placeholder}}"/>' +
                 '<div class="filelist"></div>' +
                 '</div>' +
                 '<div class="col-md-4">' +
@@ -221,7 +222,8 @@
                     'input_name': prefix + '_input_upload',
                     'id_browse': this.settings.browse_button,
                     'placeholder': this.settings.language.placeholder,
-                    'remove': this.settings.language.remove
+                    'remove': this.settings.language.remove,
+                    'validate': this.settings.required
                 };
 
 
