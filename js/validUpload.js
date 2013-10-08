@@ -1,3 +1,14 @@
+/**
+ * validUpload
+ * by mfrancois
+ * https://github.com/mfrancois
+ * @version 0.1.0
+ *
+ * Description :
+ * validUpload est basé sur plupload et validationEngine et twitter bootsrap.
+ * Ce dernier est fait pour faciliter l'utilisation et la réutilisation des deux javascript.
+ */
+
 (function (jQuery) {
 
     jQuery.validUpload = function (e, o) {
@@ -127,6 +138,11 @@
         },
         timeout: '',
         prototype: {
+
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------
+
             init: function () {
 
                 this.initTemplate();
@@ -142,6 +158,8 @@
                 }
             },
 
+            // --------------------------------------------------------------------------------------------
+
             initDefaultValue: function () {
                 if (!this.settings.dataUploader.multi_selection) {
                     this.addFileInInput(this.settings.default_value);
@@ -154,6 +172,8 @@
                                 'id': tabFile[i],
                                 'name': tabFile[i]
                             });
+
+                            this.addFileInInput(tabFile[i]);
                         }
                     }
 
@@ -222,6 +242,7 @@
             },
 
             // --------------------------------------------------------------------------------------------
+
             formatingTemplateItem: function (file) {
 
                 var obj = {
@@ -243,6 +264,8 @@
                 return tpl;
             },
 
+            // --------------------------------------------------------------------------------------------
+
             injectTemplateItem: function (tpl) {
                 if (typeof(tpl) != 'undefined' && tpl != null && tpl != '') {
                     jQuery(this.settings.selectorInjection, this.element).append(tpl);
@@ -250,13 +273,19 @@
                 }
             },
 
+            // --------------------------------------------------------------------------------------------
+
             initEventItem: function () {
                 jQuery(this.settings.selectorUploadItemDelete, this.element).off('click').on('click', jQuery.proxy(this.removeOneItem, this));
             },
 
+            // --------------------------------------------------------------------------------------------
+
             addOneItem: function (file) {
                 this.injectTemplateItem(this.formatingTemplateItem(file));
             },
+
+            // --------------------------------------------------------------------------------------------
 
             removeOneItem: function (evt) {
                 evt.preventDefault();
@@ -280,6 +309,8 @@
                     }
                 }
             },
+
+            // --------------------------------------------------------------------------------------------
 
             fileExtention: function (file) {
                 var tabFile = file.split('.');
@@ -333,8 +364,7 @@
             },
 
             // --------------------------------------------------------------------------------------------
-
-
+            // --------------------------------------------------------------------------------------------
             // --------------------------------------------------------------------------------------------
 
             initData: function () {

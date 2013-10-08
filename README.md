@@ -12,7 +12,17 @@ Ce dernier est fait pour faciliter l'utilisation et la réutilisation des deux j
 * Affichage des erreurs plupload dans les éléments de validation de validationEngine
 * Instaciantion automatique ou non du template
 * Multi instances
+* Upload multiple
+* Supression dans la queue d'upload
+* Upload simple
 * Uniformise les instantiations
+
+## Demo
+
+[http://www.kezho.com/application/data/demo/validupload](http://www.kezho.com/application/data/demo/validupload)
+
+![Exemple](http://www.kezho.com/application/data/demo/validupload/images/exemple.png)
+
 
 ## Installation
 
@@ -39,6 +49,9 @@ Ce dernier est fait pour faciliter l'utilisation et la réutilisation des deux j
 
 ### Exemple d'utilisation de base
 
+![Simple](http://www.kezho.com/application/data/demo/validupload/images/simple.png)
+
+
 ```html
     <fieldset>
          <label>Single upload</label>
@@ -56,6 +69,75 @@ Ce dernier est fait pour faciliter l'utilisation et la réutilisation des deux j
              });
          });
 ```
+
+
+### Exemple d'utilisation d'upload multiple
+
+![Multiple](http://www.kezho.com/application/data/demo/validupload/images/multiple.png)
+
+
+```html
+    <fieldset>
+        <label>Upload multiple</label>
+        <div class="uploader_multiple"></div>
+    </fieldset>
+```
+
+```js
+         jQuery('.uploader_multiple').validUpload({
+             dataUploader: {
+                 runtimes: 'html5,flash,html4',
+                 url: 'components/plupload/examples/upload.php',
+                 flash_swf_url: 'components/plupload/js/Moxie.swf',
+                 chunk_size: '1mb',
+                 multi_selection: true,
+                 unique_names: true
+             }
+         });
+```
+
+
+### Exemple d'initialisation de contenu
+
+
+#### Upload simple
+
+```html
+    <fieldset>
+        <label>Upload simple</label>
+        <div class="uploader_conteneur_defaut"></div>
+    </fieldset>
+```
+
+```js
+         jQuery('.uploader_conteneur_defaut').validUpload({
+             default_value:'test.jpg'
+         });
+```
+
+#### Upload multiple
+
+```html
+    <fieldset>
+        <label>Upload multiple</label>
+        <div class="uploader_multiple_default"></div>
+    </fieldset>
+```
+
+```js
+         jQuery('.uploader_multiple_default').validUpload({
+              dataUploader: {
+                  runtimes: 'html5,flash,html4',
+                  url: 'components/plupload/examples/upload.php',
+                  flash_swf_url: 'components/plupload/js/Moxie.swf',
+                  chunk_size: '1mb',
+                  multi_selection: true,
+                  unique_names: true
+              },
+              default_value:'test_1.jpg,test_2.png,test_3.tiff'
+          });
+```
+
 
 ### Events
 
