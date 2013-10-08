@@ -8,6 +8,7 @@
 
     jQuery.extend(jQuery.validUpload, {
         defaults: {
+
             browse_button: 'browse',
             selectorInput: '.elementUploaded',
             selectorUploadDelete: '.upload-delete',
@@ -34,6 +35,8 @@
             },
 
             use_template: true,
+            default_value: '',
+            separator: ',',
 
             // --------------------------------------------------------------------------------------------
             // --------------------------------------------------------------------------------------------
@@ -102,15 +105,6 @@
                 '<a href="#" class="glyphicon glyphicon-remove upload-delete" title="{{remove}}"></a>' +
                 '</div>' +
                 '</div>' +
-                '<div class="row">' +
-                '<div class="col-md-8">' +
-                '<div class="progressUploader progress progress-striped active">' +
-                '<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-md-4">' +
-                '<span class=" finished glyphicon glyphicon-ok-sign"></span>' +
-                '</div>' +
                 '</div>',
 
             template_one_item: '' +
@@ -142,6 +136,29 @@
 
                 this.elementUploader.init();
                 this.settings.onInit(this);
+
+                if (this.settings.default_value != '') {
+                    this.initDefaultValue();
+                }
+            },
+
+            initDefaultValue: function () {
+                if (!this.settings.dataUploader.multi_selection) {
+                    this.addFileInInput(this.settings.default_value);
+                } else {
+                    var tabFile = this.settings.default_value.split(this.settings.separator);
+
+                    for (var i in tabFile) {
+                        if (typeof(tabFile[i]) != 'undefined' && tabFile[i] != null && tabFile[i] != '') {
+                            this.addOneItem({
+                                'id': tabFile[i],
+                                'name': tabFile[i]
+                            });
+                        }
+                    }
+
+                    this.initDisplay();
+                }
             },
 
             // --------------------------------------------------------------------------------------------
@@ -258,7 +275,7 @@
                         if (targetExtentionName != '') {
                             targetName = targetName + '.' + targetExtentionName;
                         }
-                        $target.parent().parent().remove();
+                        $target.parent().parent().parent().remove();
                         this.removeFileInInput(targetName);
                     }
                 }
@@ -277,10 +294,10 @@
             addFileInInput: function (file) {
                 var valInput = jQuery(this.settings.selectorInput, this.element).val();
 
-                if (valInput == '') {
+                if (valInput == '' || !this.settings.dataUploader.multi_selection) {
                     valInput = file;
                 } else {
-                    valInput = valInput + ',' + file;
+                    valInput = valInput + this.settings.separator + file;
                 }
 
                 jQuery(this.settings.selectorInput, this.element).val(valInput);
@@ -292,7 +309,7 @@
                 if (valInput == '') {
                     return false;
                 } else {
-                    valInput = valInput.split(',');
+                    valInput = valInput.split(this.settings.separator);
 
                     var tabTmp = [];
 
@@ -304,7 +321,7 @@
                         tabTmp.push(valInput[i]);
                     }
 
-                    valInput = tabTmp.join(',');
+                    valInput = tabTmp.join(this.settings.separator);
                 }
 
                 jQuery(this.settings.selectorInput, this.element).val(valInput);
@@ -336,9 +353,16 @@
 
             // --------------------------------------------------------------------------------------------
 
-            initDisplay: function () {
+            initDisplay: function (file) {
 
-                jQuery(this.settings.selectorProgressContener, this.element).hide();
+                if (typeof(file) == 'undefined' || file == null || file == '' || !this.settings.dataUploader.multi_selection) {
+                    jQuery(this.settings.selectorProgressContener, this.element).hide();
+                } else if (typeof(file) == 'undefined' || file == null || file == '') {
+                    jQuery(this.settings.selectorProgressContener, "#" + file.id).hide();
+                } else {
+                    jQuery(this.settings.selectorProgressContener, this.element).hide();
+                }
+
                 this.tooglRemove();
                 this.toogleFinish();
 
@@ -422,7 +446,7 @@
 
                 this.settings.onFileUploaded(up, file, info);
                 this.addFileInInput(file.target_name);
-                this.initDisplay();
+                this.initDisplay(file);
             },
 
             // --------------------------------------------------------------------------------------------
