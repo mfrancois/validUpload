@@ -52,7 +52,7 @@
             // --------------------------------------------------------------------------------------------
 
 
-            template_alone: '' +
+            template_single: '' +
                 '<div class="row">' +
                 '<div class="col-md-8">' +
                 '<input type="text" class="form-control elementUploaded validate[required]" id="{{input_id}}" name="{{input_name}}" value="" placeholder="chose file"/>' +
@@ -134,7 +134,7 @@
                 var tpl = '';
 
                 if (!this.settings.dataUploader.multi_selection) {
-                    tpl = this.settings.template_alone;
+                    tpl = this.settings.template_single;
                 } else {
                     tpl = this.settings.template_multiple;
                 }
