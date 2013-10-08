@@ -11,6 +11,7 @@
             browse_button: 'browse',
             selectorInput: '.elementUploaded',
             selectorUploadDelete: '.upload-delete',
+            selectorUploadItemDelete: '.upload-item-delete',
             selectorUploadFinish: '.finished',
             selectorProgress: '.progress-bar',
             selectorProgressContener: '.progressUploader',
@@ -27,25 +28,40 @@
                 unique_names: true
             },
 
+            language: {
+                placeholder: 'Chose file',
+                remove: 'Remove'
+            },
+
             use_template: true,
 
             // --------------------------------------------------------------------------------------------
             // --------------------------------------------------------------------------------------------
             // --------------------------------------------------------------------------------------------
 
-            onInit: function() {},
-            onInitTemplate: function() {},
-            onInitData: function() {},
-            onInitDisplay: function() {},
-            onInitEvent: function() {},
+            onInit: function () {
+            },
+            onInitTemplate: function () {
+            },
+            onInitData: function () {
+            },
+            onInitDisplay: function () {
+            },
+            onInitEvent: function () {
+            },
 
             // CALLBACKS UPLOAD
 
-            onFilesAdded: function() {},
-            onUploadProgress: function() {},
-            onUploadInit: function() {},
-            onFileUploaded: function() {},
-            onUploadError: function() {},
+            onFilesAdded: function () {
+            },
+            onUploadProgress: function () {
+            },
+            onUploadInit: function () {
+            },
+            onFileUploaded: function () {
+            },
+            onUploadError: function () {
+            },
 
             // --------------------------------------------------------------------------------------------
             // --------------------------------------------------------------------------------------------
@@ -55,11 +71,11 @@
             template_single: '' +
                 '<div class="row">' +
                 '<div class="col-md-8">' +
-                '<input type="text" class="form-control elementUploaded validate[required]" id="{{input_id}}" name="{{input_name}}" value="" placeholder="chose file"/>' +
+                '<input type="text" class="form-control elementUploaded validate[required]" id="{{input_id}}" name="{{input_name}}" value="" placeholder="{{placeholder}}"/>' +
                 '</div>' +
                 '<div class="col-md-4">' +
                 '<a id="{{id_browse}}"  href="javascript:;" class="glyphicon glyphicon-open"></a>' +
-                '<a href="#" class="glyphicon glyphicon-remove upload-delete" title="Remove"></a>' +
+                '<a href="#" class="glyphicon glyphicon-remove upload-delete" title="{{remove}}"></a>' +
                 '</div>' +
                 '</div>' +
                 '<div class="row">' +
@@ -78,11 +94,12 @@
             template_multiple: '' +
                 '<div class="row">' +
                 '<div class="col-md-8">' +
-                '<input type="text" class="form-control elementUploaded validate[required]" id="{{input_id}}" name="{{input_name}}" value="" placeholder="chose file"/>' +
+                '<input type="text" class="form-control elementUploaded validate[required]" id="{{input_id}}" name="{{input_name}}" value="" style="opacity: 0;" placeholder="{{placeholder}}"/>' +
+                '<div class="filelist"></div>' +
                 '</div>' +
                 '<div class="col-md-4">' +
                 '<a id="{{id_browse}}"  href="javascript:;" class="glyphicon glyphicon-open"></a>' +
-                '<a href="#" class="glyphicon glyphicon-remove upload-delete" title="Remove"></a>' +
+                '<a href="#" class="glyphicon glyphicon-remove upload-delete" title="{{remove}}"></a>' +
                 '</div>' +
                 '</div>' +
                 '<div class="row">' +
@@ -94,10 +111,27 @@
                 '<div class="col-md-4">' +
                 '<span class=" finished glyphicon glyphicon-ok-sign"></span>' +
                 '</div>' +
+                '</div>',
+
+            template_one_item: '' +
+                '<div>' +
+                '<div class="row">' +
+                '<div class="col-md-8" data-targetname="{{id}}">' +
+                '{{file_name}}' +
+                '</div>' +
+                '<div class="col-md-4">' +
+                '<a href="#" class="glyphicon glyphicon-remove upload-item-delete" title="{{remove}}"></a>' +
+                '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                '<div class="progressUploader progress progress-striped active">' +
+                '<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>' +
+                '</div>' +
+                '</div>' +
                 '</div>'
 
         },
-        timeout:'',
+        timeout: '',
         prototype: {
             init: function () {
 
@@ -107,7 +141,6 @@
                 this.initEvent();
 
                 this.elementUploader.init();
-
                 this.settings.onInit(this);
             },
 
@@ -149,7 +182,9 @@
                 var obj = {
                     'input_id': prefix + '_input_upload',
                     'input_name': prefix + '_input_upload',
-                    'id_browse': this.settings.browse_button
+                    'id_browse': this.settings.browse_button,
+                    'placeholder': this.settings.language.placeholder,
+                    'remove': this.settings.language.remove
                 };
 
 
@@ -167,6 +202,60 @@
 
                 return true;
 
+            },
+
+            // --------------------------------------------------------------------------------------------
+            formatingTemplateItem: function (file) {
+
+                var obj = {
+                    'file_name': file.name,
+                    'id': file.id,
+                    'remove': this.settings.language.remove
+                };
+
+                var tpl = this.settings.template_one_item;
+
+
+                //Parse object value for templating
+                //
+                for (var i in obj) {
+                    tpl = tpl.replace('{{' + i + '}}', obj[i]);
+                }
+
+                return tpl;
+            },
+
+            injectTemplateItem: function (tpl) {
+                if (typeof(tpl) != 'undefined' && tpl != null && tpl != '') {
+                    jQuery(this.settings.selectorInjection, this.element).append(tpl);
+                    this.initEventItem();
+                }
+            },
+
+            initEventItem: function () {
+                jQuery(this.settings.selectorUploadItemDelete, this.element).off('click').on('click', jQuery.proxy(this.removeOneItem, this));
+            },
+
+            addOneItem: function (file) {
+                console.log(file);
+                this.injectTemplateItem(this.formatingTemplateItem(file));
+            },
+
+            removeOneItem: function (evt) {
+                evt.preventDefault();
+
+                var $target = jQuery(evt.target);
+                var tabChilds = $target.parent().parent().children();
+
+                for(var i=0; i<tabChilds.length; i++){
+                    var targetName = jQuery(tabChilds[i]).data('targetname');
+
+                    if(typeof(targetName) != 'undefined' && targetName != null && targetName != ''){
+                        $target.parent().parent().remove();
+                        console.log(targetName);
+                    }
+                }
+                console.log(evt);
             },
 
             // --------------------------------------------------------------------------------------------
@@ -250,6 +339,7 @@
                 }
             },
 
+
             // --------------------------------------------------------------------------------------------
             // --------------------------------------------------------------------------------------------
             // --------------------------------------------------------------------------------------------
@@ -272,8 +362,9 @@
 
                 this.settings.onFileUploaded(up, file, info);
 
+
                 jQuery(this.settings.selectorInput, this.element).val(file.target_name);
-                jQuery(this.settings.selectorInjection, this.element).html(file.target_name);
+                //jQuery(this.settings.selectorInjection, this.element).html(file.target_name);
                 this.initDisplay();
             },
 
@@ -298,10 +389,8 @@
             // --------------------------------------------------------------------------------------------
 
             addFile: function (up, files) {
-
                 this.settings.onFilesAdded(up, files);
-
-
+                plupload.each(files, jQuery.proxy(this.addOneItem, this));
                 jQuery(this.element).validationEngine('hide');
                 this.timeout = setTimeout(jQuery.proxy(this.startUpload, this), 200);
             },

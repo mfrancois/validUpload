@@ -60,6 +60,13 @@
                 </fieldset>
                 <hr/>
                 <fieldset>
+                    <label>Upload multiple</label>
+
+                    <div class="uploader_multiple"></div>
+                </fieldset>
+                <hr/>
+
+                <fieldset>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </fieldset>
 
@@ -263,12 +270,23 @@ jQuery('.uploader_event').validUpload({
     }
 
     jQuery(document).ready(function () {
-        jQuery('pre.console').html();
+        jQuery('pre.console').html('');
         jQuery('.uploader_conteneur').validUpload({
             filters: [
                 {title: "Image files", extensions: "jpg,gif,png"},
                 {title: "Zip files", extensions: "zip"}
             ]
+        });
+
+        jQuery('.uploader_multiple').validUpload({
+            dataUploader: {
+                runtimes: 'html5,flash,html4',
+                url: 'components/plupload/examples/upload.php',
+                flash_swf_url: 'components/plupload/js/Moxie.swf',
+                chunk_size: '1mb',
+                multi_selection: true,
+                unique_names: true
+            }
         });
 
 
