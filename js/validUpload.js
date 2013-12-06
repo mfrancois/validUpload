@@ -147,7 +147,7 @@
 
                 this.initTemplate();
                 this.initData();
-                this.initDisplay();
+                this.initDisplay(null);
                 this.initEvent();
 
                 this.elementUploader.init();
@@ -177,7 +177,7 @@
                         }
                     }
 
-                    this.initDisplay();
+                    this.initDisplay(null);
                 }
             },
 
@@ -283,6 +283,7 @@
 
             addOneItem: function (file) {
                 this.injectTemplateItem(this.formatingTemplateItem(file));
+                jQuery(this.settings.selectorProgress, "#" + file.id).show();
             },
 
             // --------------------------------------------------------------------------------------------
@@ -485,7 +486,7 @@
                 e.preventDefault();
                 jQuery(this.settings.selectorInjection, this.element).html('');
                 jQuery(this.settings.selectorInput, this.element).val('');
-                this.initDisplay();
+                this.initDisplay(null);
 
                 return false;
             },
@@ -510,7 +511,9 @@
 
             startUpload: function () {
 
-                jQuery(this.settings.selectorProgressContener, this.element).show();
+                if (!this.settings.dataUploader.multi_selection) {
+                    jQuery(this.settings.selectorProgressContener, this.element).show();
+                }
                 this.elementUploader.start();
             },
 
