@@ -258,3 +258,7 @@ Event | Param | Description
         }
     });
 ```
+
+License
+-------
+MIT: http://kezho.mit-license.org/
