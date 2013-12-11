@@ -9,7 +9,7 @@
 
     <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="components/validationEngine/css/validationEngine.jquery.css" rel="stylesheet">
-    <link type="text/css" rel="Stylesheet" href="components/SyntaxHighlighter/styles/shCoreEclipse.css" />
+    <link type="text/css" rel="Stylesheet" href="components/SyntaxHighlighter/styles/shCoreEclipse.css"/>
 
 
     <script src="components/jquery/jquery.js"></script>
@@ -31,53 +31,55 @@
 </head>
 <body>
 <a href="https://github.com/mfrancois/validUpload/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+
 <div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="page-header">
-                <h1>validUpload Exemple</h1>
-            </div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="page-header">
+            <h1>validUpload Exemple</h1>
         </div>
     </div>
-    <div class="row">
-        <h4>Exemple upload simple</h4>
-        <hr />
-        <div class="col-md-8">
-            <form class="form-inline" role="form">
-                <fieldset>
-                    <label>Single upload</label>
+</div>
+<div class="row">
+    <h4>Exemple upload simple</h4>
+    <hr/>
+    <div class="col-md-8">
+        <form class="form-inline" role="form">
+            <fieldset>
+                <label>Single upload</label>
 
-                    <div class="uploader_conteneur"></div>
-                </fieldset>
-                <hr/>
-                <fieldset>
-                    <label>Multiple instanciation with same class 1</label>
-
-                    <div class="uploader_conteneur"></div>
-                </fieldset>
-                <hr/>
-                <fieldset>
-                    <label>Multiple instanciation with same class 2</label>
-
-                    <div class="uploader_conteneur"></div>
-                </fieldset>
-                <hr/>
-                <fieldset>
-                    <label>Single upload avec valeur par defaut</label>
-                    <div class="uploader_conteneur_defaut"></div>
-                </fieldset>
-                <hr/>
-                <fieldset>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </fieldset>
-
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
+                <div class="uploader_conteneur"></div>
+            </fieldset>
             <hr/>
-            <h4>Code javascript :</h4>
+            <fieldset>
+                <label>Multiple instanciation with same class 1</label>
+
+                <div class="uploader_conteneur"></div>
+            </fieldset>
+            <hr/>
+            <fieldset>
+                <label>Multiple instanciation with same class 2</label>
+
+                <div class="uploader_conteneur"></div>
+            </fieldset>
+            <hr/>
+            <fieldset>
+                <label>Single upload avec valeur par defaut</label>
+
+                <div class="uploader_conteneur_defaut"></div>
+            </fieldset>
+            <hr/>
+            <fieldset>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </fieldset>
+
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <hr/>
+        <h4>Code javascript :</h4>
             <pre class="brush: jscript;">
             jQuery(document).ready(function () {
                 jQuery('.uploader_conteneur').validUpload({
@@ -92,37 +94,37 @@
                 default_value:'test.jpg'
             });
             </pre>
-            <hr/>
-        </div>
+        <hr/>
     </div>
+</div>
 
-    <div class="row">
-        <h4>Exemple upload multiple</h4>
-        <hr />
-        <div class="col-md-8">
-            <form class="form-inline" role="form">
-                <fieldset>
-                    <label>Upload multiple</label>
+<div class="row">
+    <h4>Exemple upload multiple</h4>
+    <hr/>
+    <div class="col-md-8">
+        <form class="form-inline" role="form">
+            <fieldset>
+                <label>Upload multiple</label>
 
-                    <div class="uploader_multiple"></div>
-                </fieldset>
-                <hr/>
-                <fieldset>
-                    <label>Upload multiple avec valeur par defaut</label>
-
-                    <div class="uploader_multiple_default"></div>
-                </fieldset>
-                <hr/>
-                <fieldset>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </fieldset>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
+                <div class="uploader_multiple"></div>
+            </fieldset>
             <hr/>
-            <h4>Code javascript :</h4>
+            <fieldset>
+                <label>Upload multiple avec valeur par defaut</label>
+
+                <div class="uploader_multiple_default"></div>
+            </fieldset>
+            <hr/>
+            <fieldset>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <hr/>
+        <h4>Code javascript :</h4>
             <pre class="brush: jscript;">
             jQuery('.uploader_multiple').validUpload({
                     dataUploader: {
@@ -149,32 +151,32 @@
             });
 
             </pre>
-            <hr/>
-        </div>
+        <hr/>
     </div>
+</div>
 
 
-    <div class="row">
-        <h4>Exemple upload event</h4>
-        <hr />
-        <div class="col-md-8">
-            <form class="form-inline" role="form">
-                <fieldset>
-                    <label>Event upload</label>
+<div class="row">
+    <h4>Exemple upload event</h4>
+    <hr/>
+    <div class="col-md-8">
+        <form class="form-inline" role="form">
+            <fieldset>
+                <label>Event upload</label>
 
-                    <div class="uploader_event"></div>
-                </fieldset>
-                <hr/>
+                <div class="uploader_event"></div>
+            </fieldset>
+            <hr/>
                 <pre class="console pre-scrollable">
 
                 </pre>
-            </form>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-                <hr/>
-                <h4>Code javascript :</h4>
-                <pre  class="brush: jscript;">
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <hr/>
+            <h4>Code javascript :</h4>
+                <pre class="brush: jscript;">
 jQuery('.uploader_event').validUpload({
     onFilesAdded: function (up, file) {
         log(' ');
@@ -257,75 +259,177 @@ jQuery('.uploader_event').validUpload({
         log('START onInitEvent');
         log('END onInitEvent');
         log('---------------------------');
+    },
+    onAfterAddOneItem: function (file) {
+        log(' ');
+        log('---------------------------');
+        log('START onAfterAddOneItem');
+        log('END onAfterAddOneItem');
+        log('---------------------------');
     }
 });
                 </pre>
-                <hr/>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <table class="table table-condensed">
-                <thead>
-                <tr>
-                    <th>Event</th>
-                    <th>Param</th>
-                    <th>Description</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="active">
-                    <td>onFilesAdded</td>
-                    <td>Uploader (up),  information sur les fichiers (file)</td>
-                    <td>Appelé à chaque fois qu'une personne ajoute un fichier.</td>
-                </tr>
-                <tr>
-                    <td>onUploadProgress</td>
-                    <td>Uploader (up),  information sur le fichier (file)</td>
-                    <td>Appelé à chaque progression de l'uplaod de fichier.</td>
-                </tr>
-                <tr class="active">
-                    <td>onUploadInit</td>
-                    <td>Uploader (up), paramètre d'instanciation du composant d'upload</td>
-                    <td>Appelé une fois que le composant est initialisé.</td>
-                </tr>
-                <tr>
-                    <td>onFileUploaded</td>
-                    <td>Uploader (up), fichier conerné (file), et les informations sur le retour de l'upload (requête)</td>
-                    <td>Appelé une fois que le fichier est uploadé correctement.</td>
-                </tr>
-                <tr class="active">
-                    <td>onUploadError</td>
-                    <td>Uploader (up) et l'erreur (err)</td>
-                    <td>Appelé une fois qu'une erreurs est lancé par le composant plupload.</td>
-                </tr>
-                <tr>
-                    <td>onInit</td>
-                    <td>Instance de l'objet (this)</td>
-                    <td>Appelé une fois que l'objet est fini d'être instantié.</td>
-                </tr>
-                <tr class="active">
-                    <td>onInitTemplate</td>
-                    <td>Instance de l'objet (this)</td>
-                    <td>Appelé une fois que le template est injecté dans son conteneur.</td>
-                </tr>
-                <tr>
-                    <td>onInitDisplay</td>
-                    <td>Instance de l'objet (this)</td>
-                    <td>Appelé une fois que les éléments sont masqués ou affichés (remove,finished...) en fonction du contenue de l'input.</td>
-                </tr>
-                <tr class="active">
-                    <td>onInitEvent</td>
-                    <td>Instance de l'objet (this)</td>
-                    <td>Appelé une fois que les évnèments sont initialisés.</td>
-                </tr>
-                </tbody>
-            </table>
+            <hr/>
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-8">
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Event</th>
+                <th>Param</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="active">
+                <td>onFilesAdded</td>
+                <td>Uploader (up), information sur les fichiers (file)</td>
+                <td>Appelé à chaque fois qu'une personne ajoute un fichier.</td>
+            </tr>
+            <tr>
+                <td>onUploadProgress</td>
+                <td>Uploader (up), information sur le fichier (file)</td>
+                <td>Appelé à chaque progression de l'uplaod de fichier.</td>
+            </tr>
+            <tr class="active">
+                <td>onUploadInit</td>
+                <td>Uploader (up), paramètre d'instanciation du composant d'upload</td>
+                <td>Appelé une fois que le composant est initialisé.</td>
+            </tr>
+            <tr>
+                <td>onFileUploaded</td>
+                <td>Uploader (up), fichier conerné (file), et les informations sur le retour de l'upload (requête)</td>
+                <td>Appelé une fois que le fichier est uploadé correctement.</td>
+            </tr>
+            <tr class="active">
+                <td>onUploadError</td>
+                <td>Uploader (up) et l'erreur (err)</td>
+                <td>Appelé une fois qu'une erreurs est lancé par le composant plupload.</td>
+            </tr>
+            <tr>
+                <td>onInit</td>
+                <td>Instance de l'objet (this)</td>
+                <td>Appelé une fois que l'objet est fini d'être instantié.</td>
+            </tr>
+            <tr class="active">
+                <td>onInitTemplate</td>
+                <td>Instance de l'objet (this)</td>
+                <td>Appelé une fois que le template est injecté dans son conteneur.</td>
+            </tr>
+            <tr class="active">
+                <td>onAfterAddOneItem</td>
+                <td>Instance du fichier file</td>
+                <td>Appelé une fois que le template est injecté dans son conteneur. La différence avec onInitTemplate
+                    est le paramètre donné à la méthode.
+                </td>
+            </tr>
+            <tr>
+                <td>onInitDisplay</td>
+                <td>Instance de l'objet (this)</td>
+                <td>Appelé une fois que les éléments sont masqués ou affichés (remove,finished...) en fonction du
+                    contenue de l'input.
+                </td>
+            </tr>
+            <tr class="active">
+                <td>onInitEvent</td>
+                <td>Instance de l'objet (this)</td>
+                <td>Appelé une fois que les évnèments sont initialisés.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
+
+<div class="row">
+    <h4>Exemple d'utilisation avec une file d'image</h4>
+    <hr/>
+    <div class="col-md-8">
+        <form class="form-inline" role="form">
+            <fieldset>
+                <label>Upload multiple</label>
+
+                <div class="uploader_multiple_file"></div>
+            </fieldset>
+            <hr/>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <h4>Code javascript :</h4>
+        <div class="alert alert-warning">Comme le script d'exemple n'upload pas vraiment je remplace les images par une image d'exemple.</div>
+            <pre class="brush: jscript;">
+                 jQuery('.uploader_multiple_file').validUpload({
+                        dataUploader: {
+                            runtimes: 'html5,flash,html4',
+                            url: 'components/plupload/examples/upload.php',
+                            flash_swf_url: 'components/plupload/js/Moxie.swf',
+                            chunk_size: '1mb',
+                            multi_selection: true,
+                            unique_names: true,
+                            resize: {width: 320, height: 240, quality: 90},
+                            filters: [
+                                {title: "Images files", extensions: "jpg,jepg,tiff,gif,png,ico"}
+                            ]
+                        },
+                        default_value: 'image1.jpg,image2.jpg',
+                        onFileUploaded: function (up, file, info) {
+                            if (typeof(file.target_name) != 'undefined') {
+                                var tpl = '<img src="http://placehold.it/145x98&text=Exemple" alt="" />';
+                                var $elt = jQuery('#' + file.id).children("div:nth-child(2)");
+                                $elt.prepend(tpl);
+                            }
+                        },
+                        onAfterAddOneItem: function (file) {
+                            if (typeof(file.target_name) != 'undefined') {
+                                var tpl = '<img src="http://placehold.it/145x98&text=Exemple" alt="" />';
+                                var $elt = jQuery('#' + file.id).children("div:nth-child(2)");
+                                $elt.prepend(tpl);
+                            }
+                        }
+                    });
+            </pre>
+        <h4>Code javascript pour afficher la vrai image :</h4>
+        <pre class="brush: jscript;">
+                 jQuery('.uploader_multiple_file').validUpload({
+                        dataUploader: {
+                            runtimes: 'html5,flash,html4',
+                            url: 'components/plupload/examples/upload.php',
+                            flash_swf_url: 'components/plupload/js/Moxie.swf',
+                            chunk_size: '1mb',
+                            multi_selection: true,
+                            unique_names: true,
+                            resize: {width: 320, height: 240, quality: 90},
+                            filters: [
+                                {title: "Images files", extensions: "jpg,jepg,tiff,gif,png,ico"}
+                            ]
+                        },
+                        default_value: 'image1.jpg,image2.jpg',
+                        onFileUploaded: function (up, file, info) {
+                            if (typeof(file.target_name) != 'undefined') {
+                                var tpl = '<img src="http://mon_url/' + file.target_name + '" alt="" />';
+                                var $elt = jQuery('#' + file.id).children("div:nth-child(2)");
+                                $elt.prepend(tpl);
+                            }
+                        },
+                        onAfterAddOneItem: function (file) {
+                            if (typeof(file.target_name) != 'undefined') {
+                                var tpl = '<img src="http://mon_url/' + file.target_name + '" alt="" />';
+                                var $elt = jQuery('#' + file.id).children("div:nth-child(2)");
+                                $elt.prepend(tpl);
+                            }
+                        }
+                    });
+            </pre>
+        <hr/>
+    </div>
+</div>
+
+</div>
 
 <script type="text/javascript">
 
@@ -344,7 +448,7 @@ jQuery('.uploader_event').validUpload({
         });
 
         jQuery('.uploader_conteneur_defaut').validUpload({
-            default_value:'test.jpg'
+            default_value: 'test.jpg'
         });
 
         jQuery('.uploader_multiple').validUpload({
@@ -367,7 +471,7 @@ jQuery('.uploader_event').validUpload({
                 multi_selection: true,
                 unique_names: true
             },
-            default_value:'test_1.jpg,test_2.png,test_3.tiff'
+            default_value: 'test_1.jpg,test_2.png,test_3.tiff'
         });
 
 
@@ -453,9 +557,45 @@ jQuery('.uploader_event').validUpload({
                 log('START onInitEvent');
                 log('END onInitEvent');
                 log('---------------------------');
+            },
+            onAfterAddOneItem: function (file) {
+                log(' ');
+                log('---------------------------');
+                log('START onAfterAddOneItem');
+                log('END onAfterAddOneItem');
+                log('---------------------------');
             }
         });
 
+        jQuery('.uploader_multiple_file').validUpload({
+            dataUploader: {
+                runtimes: 'html5,flash,html4',
+                url: 'components/plupload/examples/upload.php',
+                flash_swf_url: 'components/plupload/js/Moxie.swf',
+                chunk_size: '1mb',
+                multi_selection: true,
+                unique_names: true,
+                resize: {width: 320, height: 240, quality: 90},
+                filters: [
+                    {title: "Images files", extensions: "jpg,jepg,tiff,gif,png,ico"}
+                ]
+            },
+            default_value: 'image1.jpg,image2.jpg',
+            onFileUploaded: function (up, file, info) {
+                if (typeof(file.target_name) != 'undefined') {
+                    var tpl = '<img src="http://placehold.it/145x98&text=Exemple" alt="" />';
+                    var $elt = jQuery('#' + file.id).children("div:nth-child(2)");
+                    $elt.prepend(tpl);
+                }
+            },
+            onAfterAddOneItem: function (file) {
+                if (typeof(file.target_name) != 'undefined') {
+                    var tpl = '<img src="http://placehold.it/145x98&text=Exemple" alt="" />';
+                    var $elt = jQuery('#' + file.id).children("div:nth-child(2)");
+                    $elt.prepend(tpl);
+                }
+            }
+        });
 
 
         SyntaxHighlighter.config.clipboardSwf = 'components/SyntaxHighlighter/scripts/clipboard.swf';
@@ -463,10 +603,17 @@ jQuery('.uploader_event').validUpload({
     });
 </script>
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-35954315-2', 'kezho.com');
     ga('send', 'pageview');

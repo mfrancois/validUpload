@@ -259,6 +259,56 @@ Event | Param | Description
     });
 ```
 
+
+#### Exemple d'utilisation avec une file d'image
+
+![File](http://www.kezho.com/application/data/demo/validupload/images/file.png)
+
+
+
+```html
+     <form class="form-inline" role="form">
+        <fieldset>
+            <label>Upload multiple</label>
+
+            <div class="uploader_multiple_file"></div>
+        </fieldset>
+        <hr/>
+    </form>
+```
+
+```js
+    jQuery('.uploader_multiple_file').validUpload({
+        dataUploader: {
+            runtimes: 'html5,flash,html4',
+            url: 'components/plupload/examples/upload.php',
+            flash_swf_url: 'components/plupload/js/Moxie.swf',
+            chunk_size: '1mb',
+            multi_selection: true,
+            unique_names: true,
+            resize: {width: 320, height: 240, quality: 90},
+            filters: [
+                {title: "Images files", extensions: "jpg,jepg,tiff,gif,png,ico"}
+            ]
+        },
+        default_value: 'image1.jpg,image2.jpg',
+        onFileUploaded: function (up, file, info) {
+            if (typeof(file.target_name) != 'undefined') {
+                var tpl = '<img src="http://mon_url/' + file.target_name + '" alt="" />';
+                var $elt = jQuery('#' + file.id).children("div:nth-child(2)");
+                $elt.prepend(tpl);
+            }
+        },
+        onAfterAddOneItem: function (file) {
+            if (typeof(file.target_name) != 'undefined') {
+                var tpl = '<img src="http://mon_url/' + file.target_name + '" alt="" />';
+                var $elt = jQuery('#' + file.id).children("div:nth-child(2)");
+                $elt.prepend(tpl);
+            }
+        }
+    });
+```
+
 License
 -------
 MIT: http://kezho.mit-license.org/
