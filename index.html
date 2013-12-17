@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Validupload by mfrancois</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Validupload</h1>
+        <h2>Utilisation de validationEngine et de plupload pour rendre obligatoire les uploads</h2>
+        <a href="https://github.com/mfrancois/validUpload" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="validupload" class="anchor" href="#validupload"><span class="octicon octicon-link"></span></a>validUpload</h1>
+
+<h2>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h2>
+
+<p>validUpload est basé sur plupload et validationEngine et twitter bootsrap.
+Ce dernier est fait pour faciliter l'utilisation et la réutilisation des deux javascript.</p>
+
+<ul>
+<li>
+<code>validationEngine</code> pour la gestion des erreurs</li>
+<li>
+<code>plupload</code> pour la gestion des uploads</li>
+<li>
+<code>twitter bootsrap</code> pour la gestion de la barre de progression</li>
+<li>Validation à l'aide de validationEngine</li>
+<li>Affichage des erreurs plupload dans les éléments de validation de validationEngine</li>
+<li>Instaciantion automatique ou non du template</li>
+<li>Multi instances</li>
+<li>Upload multiple</li>
+<li>Supression dans la queue d'upload</li>
+<li>Upload simple</li>
+<li>Uniformise les instantiations</li>
+</ul><h2>
+<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<p><a href="http://www.kezho.com/application/data/demo/validupload">http://www.kezho.com/application/data/demo/validupload</a></p>
+
+<p><img src="http://www.kezho.com/application/data/demo/validupload/images/exemple.png" alt="Exemple"></p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a name="bower" class="anchor" href="#bower"><span class="octicon octicon-link"></span></a>Bower</h3>
+
+<div class="highlight highlight-sh"><pre>    bower install
+</pre></div>
+
+<h4>
+<a name="d%C3%A9pendances" class="anchor" href="#d%C3%A9pendances"><span class="octicon octicon-link"></span></a>Dépendances</h4>
+
+<div class="highlight highlight-json"><pre>
+    <span class="s2">"jquery"</span><span class="err">:</span> <span class="s2">"~1.10.2"</span><span class="err">,</span>
+    <span class="s2">"validationEngine"</span><span class="err">:</span> <span class="s2">"~2.6.4"</span><span class="err">,</span>
+    <span class="s2">"plupload"</span><span class="err">:</span> <span class="s2">"~2.0.0"</span><span class="err">,</span>
+    <span class="s2">"bootstrap"</span><span class="err">:</span> <span class="s2">"~3.0.0"</span>
+</pre></div>
+
+<h2>
+<a name="utilisation" class="anchor" href="#utilisation"><span class="octicon octicon-link"></span></a>Utilisation</h2>
+
+<h3>
+<a name="exemple-dutilisation-de-base" class="anchor" href="#exemple-dutilisation-de-base"><span class="octicon octicon-link"></span></a>Exemple d'utilisation de base</h3>
+
+<p><img src="http://www.kezho.com/application/data/demo/validupload/images/simple.png" alt="Simple"></p>
+
+<div class="highlight highlight-html"><pre>    <span class="nt">&lt;fieldset&gt;</span>
+         <span class="nt">&lt;label&gt;</span>Single upload<span class="nt">&lt;/label&gt;</span>
+         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"uploader_conteneur"</span><span class="nt">&gt;&lt;/div&gt;</span>
+     <span class="nt">&lt;/fieldset&gt;</span>
+</pre></div>
+
+<div class="highlight highlight-js"><pre>         <span class="nx">jQuery</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+             <span class="nx">jQuery</span><span class="p">(</span><span class="s1">'.uploader_conteneur'</span><span class="p">).</span><span class="nx">validUpload</span><span class="p">({</span>
+                 <span class="nx">filters</span><span class="o">:</span> <span class="p">[</span>
+                     <span class="p">{</span><span class="nx">title</span><span class="o">:</span> <span class="s2">"Image files"</span><span class="p">,</span> <span class="nx">extensions</span><span class="o">:</span> <span class="s2">"jpg,gif,png"</span><span class="p">},</span>
+                     <span class="p">{</span><span class="nx">title</span><span class="o">:</span> <span class="s2">"Zip files"</span><span class="p">,</span> <span class="nx">extensions</span><span class="o">:</span> <span class="s2">"zip"</span><span class="p">}</span>
+                 <span class="p">]</span>
+             <span class="p">});</span>
+         <span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="exemple-dutilisation-dupload-multiple" class="anchor" href="#exemple-dutilisation-dupload-multiple"><span class="octicon octicon-link"></span></a>Exemple d'utilisation d'upload multiple</h3>
+
+<p><img src="http://www.kezho.com/application/data/demo/validupload/images/multiple.png" alt="Multiple"></p>
+
+<div class="highlight highlight-html"><pre>    <span class="nt">&lt;fieldset&gt;</span>
+        <span class="nt">&lt;label&gt;</span>Upload multiple<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"uploader_multiple"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/fieldset&gt;</span>
+</pre></div>
+
+<div class="highlight highlight-js"><pre>         <span class="nx">jQuery</span><span class="p">(</span><span class="s1">'.uploader_multiple'</span><span class="p">).</span><span class="nx">validUpload</span><span class="p">({</span>
+             <span class="nx">dataUploader</span><span class="o">:</span> <span class="p">{</span>
+                 <span class="nx">runtimes</span><span class="o">:</span> <span class="s1">'html5,flash,html4'</span><span class="p">,</span>
+                 <span class="nx">url</span><span class="o">:</span> <span class="s1">'components/plupload/examples/upload.php'</span><span class="p">,</span>
+                 <span class="nx">flash_swf_url</span><span class="o">:</span> <span class="s1">'components/plupload/js/Moxie.swf'</span><span class="p">,</span>
+                 <span class="nx">chunk_size</span><span class="o">:</span> <span class="s1">'1mb'</span><span class="p">,</span>
+                 <span class="nx">multi_selection</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                 <span class="nx">unique_names</span><span class="o">:</span> <span class="kc">true</span>
+             <span class="p">}</span>
+         <span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="exemple-dinitialisation-de-contenu" class="anchor" href="#exemple-dinitialisation-de-contenu"><span class="octicon octicon-link"></span></a>Exemple d'initialisation de contenu</h3>
+
+<h4>
+<a name="upload-simple" class="anchor" href="#upload-simple"><span class="octicon octicon-link"></span></a>Upload simple</h4>
+
+<div class="highlight highlight-html"><pre>    <span class="nt">&lt;fieldset&gt;</span>
+        <span class="nt">&lt;label&gt;</span>Upload simple<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"uploader_conteneur_defaut"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/fieldset&gt;</span>
+</pre></div>
+
+<div class="highlight highlight-js"><pre>         <span class="nx">jQuery</span><span class="p">(</span><span class="s1">'.uploader_conteneur_defaut'</span><span class="p">).</span><span class="nx">validUpload</span><span class="p">({</span>
+             <span class="nx">default_value</span><span class="o">:</span><span class="s1">'test.jpg'</span>
+         <span class="p">});</span>
+</pre></div>
+
+<h4>
+<a name="upload-multiple" class="anchor" href="#upload-multiple"><span class="octicon octicon-link"></span></a>Upload multiple</h4>
+
+<div class="highlight highlight-html"><pre>    <span class="nt">&lt;fieldset&gt;</span>
+        <span class="nt">&lt;label&gt;</span>Upload multiple<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"uploader_multiple_default"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/fieldset&gt;</span>
+</pre></div>
+
+<div class="highlight highlight-js"><pre>         <span class="nx">jQuery</span><span class="p">(</span><span class="s1">'.uploader_multiple_default'</span><span class="p">).</span><span class="nx">validUpload</span><span class="p">({</span>
+              <span class="nx">dataUploader</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="nx">runtimes</span><span class="o">:</span> <span class="s1">'html5,flash,html4'</span><span class="p">,</span>
+                  <span class="nx">url</span><span class="o">:</span> <span class="s1">'components/plupload/examples/upload.php'</span><span class="p">,</span>
+                  <span class="nx">flash_swf_url</span><span class="o">:</span> <span class="s1">'components/plupload/js/Moxie.swf'</span><span class="p">,</span>
+                  <span class="nx">chunk_size</span><span class="o">:</span> <span class="s1">'1mb'</span><span class="p">,</span>
+                  <span class="nx">multi_selection</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                  <span class="nx">unique_names</span><span class="o">:</span> <span class="kc">true</span>
+              <span class="p">},</span>
+              <span class="nx">default_value</span><span class="o">:</span><span class="s1">'test_1.jpg,test_2.png,test_3.tiff'</span>
+          <span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a>Events</h3>
+
+<table>
+<thead><tr>
+<th>Event</th>
+<th>Param</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>onFilesAdded</code></td>
+<td>Uploader (up),  information sur les fichiers (file)</td>
+<td>Appelé à chaque fois qu'une personne ajoute un fichier.</td>
+</tr>
+<tr>
+<td><code>onUploadProgress</code></td>
+<td>Uploader (up),  information sur le fichier (file)</td>
+<td>Appelé à chaque progression de l'uplaod de fichier.</td>
+</tr>
+<tr>
+<td><code>onUploadInit</code></td>
+<td>Uploader (up), paramètre d'instanciation du composant d'upload</td>
+<td>Appelé une fois que le composant est initialisé.</td>
+</tr>
+<tr>
+<td><code>onFileUploaded</code></td>
+<td>Uploader (up), fichier conerné (file), et les informations sur le retour de l'upload (requête)</td>
+<td>Appelé une fois que le fichier est uploadé correctement.</td>
+</tr>
+<tr>
+<td><code>onUploadError</code></td>
+<td>Uploader (up) et l'erreur (err)</td>
+<td>Appelé une fois qu'une erreurs est lancé par le composant plupload..</td>
+</tr>
+<tr>
+<td><code>onInit</code></td>
+<td>Instance de l'objet (this)</td>
+<td>Appelé une fois que l'objet est fini d'être instantié.</td>
+</tr>
+<tr>
+<td><code>onInitTemplate</code></td>
+<td>Instance de l'objet (this)</td>
+<td>Appelé une fois que le template est injecté dans son conteneur.</td>
+</tr>
+<tr>
+<td><code>onInitDisplay</code></td>
+<td>Instance de l'objet (this)</td>
+<td>Appelé une fois que les éléments sont masqués ou affichés (remove,finished...) en fonction du contenue de l'input.</td>
+</tr>
+<tr>
+<td><code>onInitEvent</code></td>
+<td>Appelé une fois que les évnèments sont initialisés.</td>
+<td></td>
+</tr>
+</tbody>
+</table><h4>
+<a name="exemple-dimpl%C3%A9mentation-d%C3%A9v%C3%A8nement" class="anchor" href="#exemple-dimpl%C3%A9mentation-d%C3%A9v%C3%A8nement"><span class="octicon octicon-link"></span></a>Exemple d'implémentation d'évènement</h4>
+
+<div class="highlight highlight-html"><pre>    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-inline"</span> <span class="na">role=</span><span class="s">"form"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;fieldset&gt;</span>
+            <span class="nt">&lt;label&gt;</span>Event upload<span class="nt">&lt;/label&gt;</span>
+
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"uploader_event"</span><span class="nt">&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;/fieldset&gt;</span>
+        <span class="nt">&lt;hr/&gt;</span>
+        <span class="nt">&lt;pre</span> <span class="na">class=</span><span class="s">"console pre-scrollable"</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;/pre&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+</pre></div>
+
+<div class="highlight highlight-js"><pre>    <span class="nx">jQuery</span><span class="p">(</span><span class="s1">'.uploader_event'</span><span class="p">).</span><span class="nx">validUpload</span><span class="p">({</span>
+        <span class="nx">onFilesAdded</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">up</span><span class="p">,</span> <span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'START onFilesAdded'</span><span class="p">);</span>
+            <span class="nx">plupload</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">files</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">log</span><span class="p">(</span><span class="s1">'File : '</span> <span class="o">+</span> <span class="nx">files</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+            <span class="p">});</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'END onFilesAdded'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+
+        <span class="p">},</span>
+        <span class="nx">onUploadProgress</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">up</span><span class="p">,</span> <span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'START onUploadProgress'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'File : '</span> <span class="o">+</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">" ======&gt; "</span> <span class="o">+</span> <span class="nx">file</span><span class="p">.</span><span class="nx">percent</span> <span class="o">+</span> <span class="s2">" %"</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'END onUploadProgress'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+
+        <span class="p">},</span>
+        <span class="nx">onUploadInit</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">up</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'START onUploadInit'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'Runtime : '</span> <span class="o">+</span> <span class="nx">params</span><span class="p">.</span><span class="nx">runtime</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'END onUploadInit'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+
+        <span class="p">},</span>
+        <span class="nx">onFileUploaded</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">up</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'START onFileUploaded'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'File : '</span> <span class="o">+</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'END onFileUploaded'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+
+        <span class="p">},</span>
+        <span class="nx">onUploadError</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">up</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'START onFileUploaded'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'Error : '</span> <span class="o">+</span> <span class="nx">err</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'END onFileUploaded'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+        <span class="p">},</span>
+
+        <span class="nx">onInit</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'START onInit'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'END onInit'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">onInitTemplate</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'START onInitTemplate'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'END onInitTemplate'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">onInitData</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'START onInitData'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'END onInitData'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">onInitDisplay</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'START onInitDisplay'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'END onInitDisplay'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="nx">onInitEvent</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'START onInitEvent'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'END onInitEvent'</span><span class="p">);</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s1">'---------------------------'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+</pre></div>
+
+<h4>
+<a name="exemple-dutilisation-avec-une-file-dimage" class="anchor" href="#exemple-dutilisation-avec-une-file-dimage"><span class="octicon octicon-link"></span></a>Exemple d'utilisation avec une file d'image</h4>
+
+<p><img src="http://www.kezho.com/application/data/demo/validupload/images/file.png" alt="File"></p>
+
+<div class="highlight highlight-html"><pre>     <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-inline"</span> <span class="na">role=</span><span class="s">"form"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;fieldset&gt;</span>
+            <span class="nt">&lt;label&gt;</span>Upload multiple<span class="nt">&lt;/label&gt;</span>
+
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"uploader_multiple_file"</span><span class="nt">&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;/fieldset&gt;</span>
+        <span class="nt">&lt;hr/&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+</pre></div>
+
+<div class="highlight highlight-js"><pre>    <span class="nx">jQuery</span><span class="p">(</span><span class="s1">'.uploader_multiple_file'</span><span class="p">).</span><span class="nx">validUpload</span><span class="p">({</span>
+        <span class="nx">dataUploader</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">runtimes</span><span class="o">:</span> <span class="s1">'html5,flash,html4'</span><span class="p">,</span>
+            <span class="nx">url</span><span class="o">:</span> <span class="s1">'components/plupload/examples/upload.php'</span><span class="p">,</span>
+            <span class="nx">flash_swf_url</span><span class="o">:</span> <span class="s1">'components/plupload/js/Moxie.swf'</span><span class="p">,</span>
+            <span class="nx">chunk_size</span><span class="o">:</span> <span class="s1">'1mb'</span><span class="p">,</span>
+            <span class="nx">multi_selection</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">unique_names</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">resize</span><span class="o">:</span> <span class="p">{</span><span class="nx">width</span><span class="o">:</span> <span class="mi">320</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mi">240</span><span class="p">,</span> <span class="nx">quality</span><span class="o">:</span> <span class="mi">90</span><span class="p">},</span>
+            <span class="nx">filters</span><span class="o">:</span> <span class="p">[</span>
+                <span class="p">{</span><span class="nx">title</span><span class="o">:</span> <span class="s2">"Images files"</span><span class="p">,</span> <span class="nx">extensions</span><span class="o">:</span> <span class="s2">"jpg,jepg,tiff,gif,png,ico"</span><span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">default_value</span><span class="o">:</span> <span class="s1">'image1.jpg,image2.jpg'</span><span class="p">,</span>
+        <span class="nx">onFileUploaded</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">up</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">target_name</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">'undefined'</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">tpl</span> <span class="o">=</span> <span class="s1">'&lt;img src="http://mon_url/'</span> <span class="o">+</span> <span class="nx">file</span><span class="p">.</span><span class="nx">target_name</span> <span class="o">+</span> <span class="s1">'" alt="" /&gt;'</span><span class="p">;</span>
+                <span class="kd">var</span> <span class="nx">$elt</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s1">'#'</span> <span class="o">+</span> <span class="nx">file</span><span class="p">.</span><span class="nx">id</span><span class="p">).</span><span class="nx">children</span><span class="p">(</span><span class="s2">"div:nth-child(2)"</span><span class="p">);</span>
+                <span class="nx">$elt</span><span class="p">.</span><span class="nx">prepend</span><span class="p">(</span><span class="nx">tpl</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">onAfterAddOneItem</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">target_name</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">'undefined'</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">tpl</span> <span class="o">=</span> <span class="s1">'&lt;img src="http://mon_url/'</span> <span class="o">+</span> <span class="nx">file</span><span class="p">.</span><span class="nx">target_name</span> <span class="o">+</span> <span class="s1">'" alt="" /&gt;'</span><span class="p">;</span>
+                <span class="kd">var</span> <span class="nx">$elt</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s1">'#'</span> <span class="o">+</span> <span class="nx">file</span><span class="p">.</span><span class="nx">id</span><span class="p">).</span><span class="nx">children</span><span class="p">(</span><span class="s2">"div:nth-child(2)"</span><span class="p">);</span>
+                <span class="nx">$elt</span><span class="p">.</span><span class="nx">prepend</span><span class="p">(</span><span class="nx">tpl</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>MIT: <a href="http://kezho.mit-license.org/">http://kezho.mit-license.org/</a></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/mfrancois/validUpload/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/mfrancois/validUpload/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/mfrancois/validUpload"></a> is maintained by <a href="https://github.com/mfrancois">mfrancois</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
