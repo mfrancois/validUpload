@@ -1,4 +1,4 @@
-# validUpload
+# validUpload [![BOWER version](https://badge-me.herokuapp.com/api/bower/mfrancois/validUpload.png)](http://badges.enytc.com/for/bower/mfrancois/validUpload)
 
 ## Description
 validUpload est basé sur plupload et validationEngine et twitter bootsrap.
