@@ -1,15 +1,28 @@
 {
-  "name": "validUpload",
-  "version": "0.1.4",
-  "main": "./js/validUpload.js",
-  "ignore": [
-    "**/.*"
-  ],
-  "dependencies": {
-    "jquery": "~1.10.2",
-    "validationEngine": "~2.6.4",
-    "plupload": "~2.0.0",
-    "bootstrap": "~3.0.0",
-    "SyntaxHighlighter": "~3.0.83"
-  }
+    "name": "validUpload",
+    "version": "0.1.5",
+    "main": "./js/validUpload.js",
+    "homepage": "https://github.com/mfrancois/validUpload",
+    "ignore": [
+        "**/.*"
+    ],
+    "description": "validUpload est basé sur plupload et validationEngine et twitter bootsrap. Ce dernier est fait pour faciliter l'utilisation et la réutilisation des deux javascript.",
+    "keywords": [
+        "validation",
+        "plupload",
+        "validationengine",
+        "upload"
+    ],
+    "authors": [
+        "Maxime François <mfrancois>"
+    ],
+    "dependencies": {
+        "jquery": "~1.10.2",
+        "validationEngine": "~2.6.4",
+        "plupload": "~2.0.0"
+    },
+    "devDependencies": {
+        "bootstrap": "~3.0.0",
+        "SyntaxHighlighter": "~3.0.83"
+    }
 }

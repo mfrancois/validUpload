@@ -35,14 +35,24 @@ Ce dernier est fait pour faciliter l'utilisation et la réutilisation des deux j
 #### Dépendances
 
 ```json
-
-    "jquery": "~1.10.2",
-    "validationEngine": "~2.6.4",
-    "plupload": "~2.0.0",
-    "bootstrap": "~3.0.0"
+   "jquery": "~1.10.2",
+   "validationEngine": "~2.6.4",
+   "plupload": "~2.0.0"
 ```
 
+#### Dépendances de développement
 
+Si vous voulez testez l'index il vous faudra des librairies en plus.
+Pour ce faire installez les `devDependencies` :
+
+```json
+
+     "devDependencies": {
+         "bootstrap": "~3.0.0",
+        "SyntaxHighlighter": "~3.0.83"
+     }
+
+```
 
 ## Utilisation
 
