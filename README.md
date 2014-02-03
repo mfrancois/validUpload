@@ -322,3 +322,7 @@ Event | Param | Description
 License
 -------
 MIT: http://kezho.mit-license.org/
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mfrancois/validupload/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
